@@ -3,6 +3,23 @@
 require 'optparse'
 require 'json'
 require 'open3'
+require 'time'
+
+class AWSABUtilities
+  def validate_and_convert_to_epoch(input)
+    begin
+      if input.is_a?(Integer)
+        epoch_time = input
+      else
+        datetime = Time.parse(input)
+        epoch_time = datetime.to_i
+      end
+    rescue ArgumentError
+      raise "Invalid datetime format"
+    end
+    epoch_time
+  end
+end
 
 class AWSCLIRunner
   def initialize(profile)
@@ -25,6 +42,8 @@ class AWSCLIRunner
   end
 
   def query_cloudwatch_logs(log_group, start_time, end_time, filter_pattern)
+    start_time = AWSABUtilities::validate_and_convert_to_epoch(start_time)
+    end_time = AWSABUtilities::validate_and_convert_to_epoch(end_time)
     command = [
       "aws logs filter-log-events",
       "--log-group-name #{log_group}",
@@ -45,8 +64,8 @@ class AWSAbstractor
       description: "Query CloudWatch logs",
       params: [
         { key: :log_group, prompt: "Enter CloudWatch log group name: " },
-        { key: :start_time, prompt: "Enter start time in milliseconds since epoch: ", type: :integer },
-        { key: :end_time, prompt: "Enter end time in milliseconds since epoch: ", type: :integer },
+        { key: :start_time, prompt: "Enter start datetime: " },
+        { key: :end_time, prompt: "Enter end datetime: " },
         { key: :filter_pattern, prompt: "Enter filter pattern for CloudWatch logs: " }
       ]
     },
