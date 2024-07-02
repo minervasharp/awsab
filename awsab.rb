@@ -74,7 +74,7 @@ class AWSAbstractor
   def initialize
     @options = {}
     OptionParser.new do |opts|
-      opts.banner = "Usage: my_utility [options]"
+      opts.banner = "Welcome to AWSABstractor v0.0.02a \nMina was here ;)\nUsage: awsab [options]"
 
       opts.on("-pPROFILE", "--profile=PROFILE", "AWS profile to use") do |profile|
         @options[:profile] = profile
