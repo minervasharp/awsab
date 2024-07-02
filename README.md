@@ -8,7 +8,7 @@ a user-friendly layer of abstraction on top of awscli
 `awsab [--profile ___ ] --<service> --service-options --help `
 
 # Install
-sudo mv awsab.rb /usr/local/bin/awsab 
-sudo chmod +x /usr/local/bin/awsab 
+`sudo mv awsab.rb /usr/local/bin/awsab `
+`sudo chmod +x /usr/local/bin/awsab `
 
 
