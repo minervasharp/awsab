@@ -9,6 +9,7 @@ a user-friendly layer of abstraction on top of awscli
 
 # Install
 `sudo mv awsab.rb /usr/local/bin/awsab `
+
 `sudo chmod +x /usr/local/bin/awsab `
 
-
+`sudo gem install optparse json open3 time`
